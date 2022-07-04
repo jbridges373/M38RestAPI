@@ -1,4 +1,4 @@
-require("db/connection"); // instantly run database connection
+require("./db/connection"); // instantly run database connection
 const express = require("express"); // pull in all of express module
 const userRouter = require("./user/routes"); // bring in all endpoints connected to userRouter
 const app = express(); // create webserver constant to manipulate

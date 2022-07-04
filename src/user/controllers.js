@@ -1,6 +1,6 @@
 const User = require("./model");
 
-exports.signUp = async (request,response) => {
+exports.signUp = async (req,res) => {
     try {
         const newUser = await User.create(req.body); //req.body is an object that contains k/v pairs that match mu USer model
         res.send({user: newUser});
