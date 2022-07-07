@@ -1,22 +1,45 @@
 const jwt = require("jsonwebtoken");
 const User = require("./model");
 
-exports.addUser = async (req, res) => {
+exports.signUp = async (req, res) => {
   try {
-    const newUser = await User.create(req.body);
-    const token = await jwt.sign({ _id: newUser._id }, process.env.SECRET);
-    res.status(200).send({ user: newUser.username, token: token });
+    const newUser = await User.create(req.body); //req.body is an object that contains k/v pairs that match my User model
+    const token = jwt.sign({ id: newUser._id }, process.env.SECRET); //sign method creates a token with object payload hidden in it
+    res.send({ user: newUser, token });
   } catch (error) {
     console.log(error);
-    res.status(500).send({ err: error.message });
+    res.send({ error });
   }
 };
+
 exports.login = async (req, res) => {
   try {
-    const token = await jwt.sign({ _id: req.user._id }, process.env.SECRET);
-    res.status(200).send({ user: req.user.username, token: token });
+    // const user = await User.findOne({
+    //   username: req.body.username,
+    //   password: req.body.password,
+    // });
+    console.log("in login " + req.user);
+    if (!req.user) {
+      throw new Error("Incorrect credentials");
+    } else {
+      res.send({ user: req.user });
+    }
   } catch (error) {
     console.log(error);
-    res.status(500).send({ err: error.message });
+    res.send({ error });
+  }
+};
+
+exports.listUser = async (req, res) => {
+  try {
+    const user = await User.findOne({ username: req.params.username });
+    if (!user) {
+      throw new Error("No user found");
+    } else {
+      res.send({ user });
+    }
+  } catch (error) {
+    console.log(error);
+    res.send({ error });
   }
 };
