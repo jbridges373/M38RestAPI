@@ -7,7 +7,7 @@ I undertook this project as part of a coding bootcamp, and it was an introductio
 On cloning this repository navigate to its' root folder and open a command line interface and run `npm i` to download all of its requirement packages.
 After this you can run the server by running `node .\src\server.js`
 
-From there you must (currently) use a REST API client like ThunderClient,Insomnia, Postman, etc. to send requests to the endpoints listed below
+From there you must (currently) use a REST API client like ThunderClient, Insomnia, Postman, etc. to send requests to the endpoints listed below
 
 ### Environment Variables:
 
