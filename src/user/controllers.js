@@ -6,7 +6,7 @@ exports.signUp = async (req, res) => {
   try {
     const newUser = await User.create(req.body); //req.body is an object that contains k/v pairs that match my User model
     // sign method creates a token with object payload hidden
-    const token = jwt.sign({ id: newUser._id }, process.env.secret);
+    const token = jwt.sign({ id: newUser._id }, process.env.SECRET);
     console.log(token);
     res.send({ user: newUser, token });
   } catch (error) {
@@ -30,7 +30,7 @@ exports.findAll = async (req, res) => {
   }
 };
 
-// Get a users
+// Get a user
 exports.findUser = async (req, res) => {
   try {
     const users = await User.findOne({ username: req.params.username });
@@ -45,7 +45,7 @@ exports.findUser = async (req, res) => {
   }
 };
 
-// Update a users
+// Update a user
 exports.updateUser = async (req, res) => {
   try {
     const userEdits = await User.updateOne(
@@ -74,8 +74,8 @@ exports.deleteUser = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     // const user = await User.findOne({
-    //   username: req.body.username,
-    //   password: req.body.password,
+    // username: req.body.username,
+    // password: req.body.password,
     // });
     if (!req.user) {
       throw new Error("Incorrect credentials");
